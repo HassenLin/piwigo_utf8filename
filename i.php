@@ -171,6 +171,10 @@ function parse_custom_params($tokens)
   return new DerivativeParams( new SizingParams($size, $crop, $min_size) );
 }
 
+function pack_hex($match) 
+{
+    return pack('H*', $match[1]);
+}
 function parse_request()
 {
   global $conf, $page;
@@ -200,11 +204,6 @@ function parse_request()
   }
 
   $req = ltrim($req, '/');
-
-  foreach (preg_split('#/+#', $req) as $token)
-  {
-    preg_match($conf['sync_chars_regex'], $token) or ierror('Invalid chars in request', 400);
-  }
 
   $page['derivative_path'] = PHPWG_ROOT_PATH.PWG_DERIVATIVE_DIR.$req;
 
@@ -469,8 +468,7 @@ if (strpos($page['src_location'], '/pwg_representative/')===false
 SELECT *
   FROM '.$prefixeTable.'images
   WHERE path=\''.addslashes($page['src_location']).'\'
-;';
-
+ ;';
     if ( ($row=pwg_db_fetch_assoc(pwg_query($query))) )
     {
       if (isset($row['width']))

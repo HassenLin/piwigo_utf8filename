@@ -214,7 +214,8 @@ SELECT id_uppercat, MAX(rank)+1 AS next_rank
   foreach (array_diff($fs_fulldirs, array_keys($db_fulldirs)) as $fulldir)
   {
     $dir = basename($fulldir);
-    if (preg_match($conf['sync_chars_regex'], $dir))
+    //if (preg_match($conf['sync_chars_regex'], $dir))
+    if (1)
     {
       $insert = array(
         'id'          => $next_id++,
@@ -497,7 +498,8 @@ SELECT id, path
       continue;
     }
     $filename = basename($path);
-    if (!preg_match($conf['sync_chars_regex'], $filename))
+//    if (!preg_match($conf['sync_chars_regex'], $filename))
+    if (0)
     {
       $errors[] = array(
         'path' => $path,

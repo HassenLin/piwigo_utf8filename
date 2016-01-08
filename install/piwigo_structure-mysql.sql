@@ -51,7 +51,7 @@ DROP TABLE IF EXISTS `piwigo_comments`;
 CREATE TABLE `piwigo_comments` (
   `id` int(11) unsigned NOT NULL auto_increment,
   `image_id` mediumint(8) unsigned NOT NULL default '0',
-  `date` datetime NOT NULL default '0000-00-00 00:00:00',
+  `date` datetime NOT NULL default CURRENT_TIMESTAMP,
   `author` varchar(255) default NULL,
   `email` varchar(255) default NULL,
   `author_id` mediumint(8) unsigned DEFAULT NULL,
@@ -121,7 +121,7 @@ CREATE TABLE `piwigo_groups` (
 DROP TABLE IF EXISTS `piwigo_history`;
 CREATE TABLE `piwigo_history` (
   `id` int(10) unsigned NOT NULL auto_increment,
-  `date` date NOT NULL default '0000-00-00',
+  `date` date NOT NULL,
   `time` time NOT NULL default '00:00:00',
   `user_id` mediumint(8) unsigned NOT NULL default '0',
   `IP` varchar(15) NOT NULL default '',
@@ -182,7 +182,7 @@ DROP TABLE IF EXISTS `piwigo_images`;
 CREATE TABLE `piwigo_images` (
   `id` mediumint(8) unsigned NOT NULL auto_increment,
   `file` varchar(255) binary NOT NULL default '',
-  `date_available` datetime NOT NULL default '0000-00-00 00:00:00',
+  `date_available` datetime NOT NULL default CURRENT_TIMESTAMP,
   `date_creation` datetime default NULL,
   `name` varchar(255) default NULL,
   `comment` text,
@@ -234,7 +234,7 @@ DROP TABLE IF EXISTS `piwigo_old_permalinks`;
 CREATE TABLE `piwigo_old_permalinks` (
   `cat_id` smallint(5) unsigned NOT NULL default '0',
   `permalink` varchar(64) binary NOT NULL default '',
-  `date_deleted` datetime NOT NULL default '0000-00-00 00:00:00',
+  `date_deleted` datetime NOT NULL default CURRENT_TIMESTAMP,
   `last_hit` datetime default NULL,
   `hit` int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (`permalink`)
@@ -262,7 +262,7 @@ CREATE TABLE `piwigo_rate` (
   `element_id` mediumint(8) unsigned NOT NULL default '0',
   `anonymous_id` varchar(45) NOT NULL default '',
   `rate` tinyint(2) unsigned NOT NULL default '0',
-  `date` date NOT NULL default '0000-00-00',
+  `date` date NOT NULL ,
   PRIMARY KEY  (`element_id`,`user_id`,`anonymous_id`)
 ) ENGINE=MyISAM;
 
@@ -286,7 +286,7 @@ DROP TABLE IF EXISTS `piwigo_sessions`;
 CREATE TABLE `piwigo_sessions` (
   `id` varchar(255) binary NOT NULL default '',
   `data` mediumtext NOT NULL,
-  `expiration` datetime NOT NULL default '0000-00-00 00:00:00',
+  `expiration` datetime NOT NULL default CURRENT_TIMESTAMP,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM;
 
@@ -336,7 +336,7 @@ CREATE TABLE `piwigo_themes` (
 DROP TABLE IF EXISTS `piwigo_upgrade`;
 CREATE TABLE `piwigo_upgrade` (
   `id` varchar(20) NOT NULL default '',
-  `applied` datetime NOT NULL default '0000-00-00 00:00:00',
+  `applied` datetime NOT NULL default CURRENT_TIMESTAMP,
   `description` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM;
@@ -427,7 +427,7 @@ CREATE TABLE `piwigo_user_infos` (
   `show_nb_hits` enum('true','false') NOT NULL default 'false',
   `recent_period` tinyint(3) unsigned NOT NULL default '7',
   `theme` varchar(255) NOT NULL default 'elegant',
-  `registration_date` datetime NOT NULL default '0000-00-00 00:00:00',
+  `registration_date` datetime NOT NULL default CURRENT_TIMESTAMP,
   `enabled_high` enum('true','false') NOT NULL default 'true',
   `level` tinyint unsigned NOT NULL default '0',
   `activation_key` varchar(255) default NULL,

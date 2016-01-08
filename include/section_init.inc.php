@@ -306,12 +306,12 @@ SELECT id
     {
       // main query
       $query = '
-SELECT DISTINCT(image_id)
+SELECT image_id
   FROM '.IMAGE_CATEGORY_TABLE.'
     INNER JOIN '.IMAGES_TABLE.' ON id = image_id
   WHERE
     '.$where_sql.'
-'.$forbidden.'
+'.$forbidden.' GROUP BY image_id 
   '.$conf['order_by'].'
 ;';
 
